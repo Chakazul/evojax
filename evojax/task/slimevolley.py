@@ -335,8 +335,8 @@ class Particle:
         self.c = c
 
     def display(self, canvas):
-        return circle(canvas, toX(float(self.p.x)), toY(float(self.p.y)),
-                      toP(float(self.p.r)), color=self.c)
+        return circle(canvas, toX(float(self.p.x[0])), toY(float(self.p.y[0])),
+                      toP(float(self.p.r[0])), color=self.c)
 
     def move(self):
         self.p = ParticleState(self.p.x+self.p.vx*TIMESTEP,
@@ -591,12 +591,12 @@ class Agent:
         return getObsArray(self.state)
 
     def display(self, canvas, ball_x, ball_y):
-        bx = float(ball_x)
-        by = float(ball_y)
+        bx = float(ball_x[0])
+        by = float(ball_y[0])
         p = self.p
-        x = float(p.x)
-        y = float(p.y)
-        r = float(p.r)
+        x = float(p.x[0])
+        y = float(p.y[0])
+        r = float(p.r[0])
         direction = int(p.direction)
 
         angle = math.pi * 60 / 180
