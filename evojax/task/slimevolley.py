@@ -86,6 +86,9 @@ PIXEL_WIDTH = 84*2*2
 PIXEL_HEIGHT = 84*2
 
 
+def getfloat(v):
+    return float(v if v.ndim == 0 else v[0])
+
 def setNightColors():
     # night time color:
     global BALL_COLOR, AGENT_LEFT_COLOR, AGENT_RIGHT_COLOR
@@ -335,8 +338,8 @@ class Particle:
         self.c = c
 
     def display(self, canvas):
-        return circle(canvas, toX(float(self.p.x[0])), toY(float(self.p.y[0])),
-                      toP(float(self.p.r[0])), color=self.c)
+        return circle(canvas, toX(getfloat(self.p.x)), toY(getfloat(self.p.y)),
+                      toP(getfloat(self.p.r)), color=self.c)
 
     def move(self):
         self.p = ParticleState(self.p.x+self.p.vx*TIMESTEP,
@@ -591,12 +594,12 @@ class Agent:
         return getObsArray(self.state)
 
     def display(self, canvas, ball_x, ball_y):
-        bx = float(ball_x[0])
-        by = float(ball_y[0])
+        bx = getfloat(ball_x)
+        by = getfloat(ball_y)
         p = self.p
-        x = float(p.x[0])
-        y = float(p.y[0])
-        r = float(p.r[0])
+        x = getfloat(p.x)
+        y = getfloat(p.y)
+        r = getfloat(p.r)
         direction = int(p.direction)
 
         angle = math.pi * 60 / 180
