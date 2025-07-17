@@ -89,6 +89,9 @@ PIXEL_HEIGHT = 84*2
 def getfloat(v):
     return float(v if v.ndim == 0 else v[0])
 
+def getint(v):
+    return int(v if v.ndim == 0 else v[0])
+
 def setNightColors():
     # night time color:
     global BALL_COLOR, AGENT_LEFT_COLOR, AGENT_RIGHT_COLOR
@@ -600,7 +603,7 @@ class Agent:
         x = getfloat(p.x)
         y = getfloat(p.y)
         r = getfloat(p.r)
-        direction = int(p.direction)
+        direction = getint(p.direction)
 
         angle = math.pi * 60 / 180
         if direction == 1:
@@ -627,7 +630,7 @@ class Agent:
                         color=(0, 0, 0))
 
         # draw coins (lives) left
-        num_lives = int(p.life)
+        num_lives = getint(p.life)
         for i in range(1, num_lives):
             canvas = circle(canvas, toX(direction*(REF_W/2+0.5-i*2.)),
                             WINDOW_HEIGHT-toY(1.5), toP(0.5),
